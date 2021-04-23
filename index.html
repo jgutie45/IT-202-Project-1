@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Project 1</title>
+    <style>
+        #topnav{
+            background-color: darkslategrey;
+            padding: 4px;
+            color: white;
+        }
+        #content{
+            font-size: 2em;
+        }
+        .screen{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="topnav">
+        <a data-screen="home">Home</a> |
+        <a data-screen="form">Form</a> |
+        <a data-screen="data">Data</a> |
+        <a data-screen="map">Map</a> |
+        <a data-screen="about">About</a>
+    </div>
+    <div id="content">
+        <div class="screen" id="home">Home page Content</div>
+        <div class="screen" id="form">A form to allow users to filter the data</div>
+        <div class="screen" id="data">The data in a listing form (using cards or list items), displaying</div>
+        <div class="screen" id="map">The data mapped, with markers and info windows. The info window content should be the same as above.</div>
+        <div class="screen" id="about">Information about the app, including your name.</div>
+    </div>
+
+    <script>
+        let startScreen = document.location.search.replace("?", "");
+
+        document.querySelector("#" + startScreen).style.display = "block";
+
+        let navanchors = document.querySelectorAll("div#topnav a");
+
+        navanchors.forEach( (anchor) => {
+            anchor.addEventListener("click", (event) => {
+                // Hide all the screens first 
+                document.querySelectorAll(".screen").forEach( (screen) =>{
+                    screen.style.display = "none";
+                });
+
+                // Read data-screen attribute
+                let screen = event.target.getAttribute("data-screen");
+
+                // Find relevant screem 
+                let targetScreen = document.querySelector("#" + screen);
+                    
+                // Show it
+                targetScreen.style.display = "block";
+            })
+        });
+    </script>
+
+</body>
+</html>
